@@ -1,8 +1,8 @@
 from fastapi import APIRouter, status
 from pydantic import BaseModel
-from db.client import db_client
-from db.models.data import Data
-from db.schemas.Data import data_schemas
+from .db.client import db_client
+from .db.models.data import Data
+from .db.schemas.Data import data_schemas
 
 router = APIRouter(prefix="/Data",
                    tags=["Data"],
