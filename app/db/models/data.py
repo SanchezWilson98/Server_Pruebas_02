@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 class Data(BaseModel):
-    id: str and None
+    id: str or None
     name: str
     data: list
 
