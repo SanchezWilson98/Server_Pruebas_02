@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status
 from pydantic import BaseModel
 from app.db.client import db_client
-from app.db.models.data import Data
+from app.db.models.data import Data, Name
 from app.db.schemas.Data import data_schemas
 
 router = APIRouter(prefix="/Data",
@@ -16,15 +16,11 @@ async def hello():
     return {"Hello": "Activate"}
 
 
-@router.post("/", response_model= Data, status_code=status.HTTP_201_CREATED)
-async def receive(data: Data):
+@router.post("/", status_code=status.HTTP_201_CREATED)
+async def receive(data: Name):
 
     Data_Dict = dict(data)
-    del Data_Dict["id"]
+    Data_Dict2 = dict(Data_Dict["DATA"]) 
 
-    id = db_client.local.Data.insert_one(Data_Dict).inserted_id
-
-    new_data = data_schemas(db_client.local.Data.find_one({"_id": id}))
-
-    return Data(**new_data)
+    id = db_client.local.Data.insert_one(Data_Dict2).inserted_id
 
