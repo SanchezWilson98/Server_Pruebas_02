@@ -1,7 +1,10 @@
 from pydantic import BaseModel
+from typing import Union
 
 class Data(BaseModel):
-    id: str or None
-    name: str
-    data: list
+    name : str
+    data: str
+
+class Name(BaseModel):
+    DATA: (Union[Data, None]) = None
 
