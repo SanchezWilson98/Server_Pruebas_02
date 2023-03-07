@@ -7,4 +7,4 @@ app.include_router(data_receive.router)
 
 @app.get("/")
 async def hola():
-    return {"Wilson":"Andres"}
+    return {"Code":"Ok"}
