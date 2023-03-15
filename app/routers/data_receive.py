@@ -22,7 +22,9 @@ async def receive(data: Name):
 
     Data_Dict = dict(data)
     Data_Dict2 = dict(Data_Dict["DATA"])
-    Data_Dict2["time"] = str(datetime.now())
+    now_utc = datetime.now(timezone('UTC'))
+    now_Bogota = now_utc.astimezone(pytz.timezone('America/Bogota'))
+    Data_Dict2["time"] = str(now_Bogota)
 
     id = db_client.local.Data.insert_one(Data_Dict2).inserted_id
 
