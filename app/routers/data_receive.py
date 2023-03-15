@@ -1,4 +1,5 @@
 from fastapi import APIRouter, status
+from datetime import datetime
 from pydantic import BaseModel
 from app.db.client import db_client
 from app.db.models.data import Data, Name
@@ -20,7 +21,8 @@ async def hello():
 async def receive(data: Name):
 
     Data_Dict = dict(data)
-    Data_Dict2 = dict(Data_Dict["DATA"]) 
+    Data_Dict2 = dict(Data_Dict["DATA"])
+    Data_Dict2["time"] = str(datetime.now())
 
     id = db_client.local.Data.insert_one(Data_Dict2).inserted_id
 
